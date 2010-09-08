@@ -32,8 +32,8 @@ object EmbeddedOption extends EmbeddedMonad[Option] {
         runMonad(ctx)
 }
 
-object EmbeddedSeq extends EmbeddedMonad[Seq] {
-    def runSeq[C](ctx: => Any @cpsParam[Seq[Any], Seq[Any]]) : Seq[C] =
+object EmbeddedTraversable extends EmbeddedMonad[Traversable] {
+    def runTraversable[C](ctx: => Any @cpsParam[Traversable[Any], Traversable[Any]]) : Traversable[C] =
         runMonad(ctx)
 
     def guard[A](b:Boolean) = shift { k:(Unit => Seq[Any]) =>
@@ -43,6 +43,15 @@ object EmbeddedSeq extends EmbeddedMonad[Seq] {
 
 object EmbeddedIterable extends EmbeddedMonad[Iterable] {
     def runIterable[C](ctx: => Any @cpsParam[Iterable[Any], Iterable[Any]]) : Iterable[C] =
+        runMonad(ctx)
+
+    def guard[A](b:Boolean) = shift { k:(Unit => Seq[Any]) =>
+        if (b) k() else Seq()
+    }
+}
+
+object EmbeddedSeq extends EmbeddedMonad[Seq] {
+    def runSeq[C](ctx: => Any @cpsParam[Seq[Any], Seq[Any]]) : Seq[C] =
         runMonad(ctx)
 
     def guard[A](b:Boolean) = shift { k:(Unit => Seq[Any]) =>
