@@ -44,11 +44,11 @@ Simple Example for using the Option-Monad:
 
 List-Monad example:
 
-scala> import embeddedmonads.EmbeddedSeq._
-import embeddedmonads.EmbeddedSeq._
+    scala> import embeddedmonads.EmbeddedSeq._
+    import embeddedmonads.EmbeddedSeq._
 
-scala> runSeq[(Int,Char)] { (Seq(1,2,3).value, Seq('a', 'b', 'c').value) }
-res5: Seq[(Int, Char)] = List((1,a), (1,b), (1,c), (2,a), (2,b), (2,c), (3,a),
-(3,b), (3,c))
+    scala> runSeq[(Int,Char)] { (Seq(1,2,3).value, Seq('a', 'b', 'c').value) }
+    res5: Seq[(Int, Char)] = List((1,a), (1,b), (1,c), (2,a), (2,b), (2,c), (3,a),
+    (3,b), (3,c))
 
 
